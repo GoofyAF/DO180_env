@@ -1,0 +1,14 @@
+[workstations]
+workstation.lab.example.com
+
+[utilities]
+utility.lab.example.com
+
+[registry]
+registry.ocp4.example.com
+
+[identity]
+idm.ocp4.example.com
+
+[cluster]
+master01.ocp4.example.com

@@ -1,0 +1,45 @@
+---
+- name: Configures rhel9 vms for rhce test environment
+  hosts: all
+  become: true
+  vars_files:
+    - vault.yml
+  tasks:
+
+    - name: Register host with RH Subscription Service
+      community.general.redhat_subscription:
+        state: present
+        username: "{{ rh_user }}"
+        password: "{{ rh_pw }}"
+        auto_attach: true
+
+    - name: Update all systems
+      ansible.builtin.dnf:
+        name: "*"
+        state: latest
+
+# - name: Ensure Quay.io registry is running on utility server
+#   hosts: utility.lab.example.com
+#   vars:
+#     podman_user: quay
+#     container_registry: quay.io
+#   tasks:
+#     - name: Enable Epel Repo for podman
+#       ansible.builtin.dnf:
+#         name: epel-release
+#         state: present
+
+#     - name: Install podman
+#       ansible.builtin.dnf:
+#         name: podman
+#         state: present
+
+#     #- name: Run quay.io setup utility 
+
+#     - name: Add Quay to hostsfile
+#       ansible.builtin.lineinfile:
+#         path: /etc/hosts
+#         line: '127.0.0.1   quay'
+#         state: present
+
+    
